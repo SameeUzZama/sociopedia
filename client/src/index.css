@@ -3,9 +3,16 @@ body {
   font-family: Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(225, 222, 222) !important;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+.header-text {
+  color: #606080;
+  font-weight: 500;
+  margin-top: 7px;
+  font-size: 17px;
 }

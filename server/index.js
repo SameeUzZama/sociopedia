@@ -1,8 +1,9 @@
- import express from "express";
+import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import morgan from "morgan";
 import userRouter from "./routes/user.js";
+import tourRouter from "./routes/tour.js";
 
 // mongodb+srv://codesamee:<password>@cluster0.eyydmtq.mongodb.net/?retryWrites=true&w=majority
 // mongodb+srv://codesamee:8378825832@cluster0.eyydmtq.mongodb.net/tour_db?retryWrites=true&w=majority
@@ -19,6 +20,7 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use("/users", userRouter); //   http://localhost:5000/users/signup
+app.use("/tour", tourRouter); //   http://localhost:5000/tour
 
 const MONGODB_URL =
   "mongodb+srv://codesamee:8378825832@cluster0.eyydmtq.mongodb.net/tour_db?retryWrites=true&w=majority";
@@ -29,12 +31,3 @@ mongoose
     app.listen(port, () => console.log(`Live Server Running on port ${port}`));
   })
   .catch((error) => console.log(`${error} did not connect`));
-
-// our first route
-// app.get("/", (req, res) => {
-//   res.send("Hello Express");
-// });
-
-// app.listen(port, () => {
-//   console.log(`server running on port ${port}`);
-// });

@@ -12,6 +12,8 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { login } from "../redux/features/authSlice";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const initialState = {
   email: "",
@@ -40,6 +42,8 @@ const Login = () => {
     setFormValue({ ...formValue, [name]: value });
   };
 
+  const { loginWithRedirect } = useAuth0();
+
   return (
     <div
       style={{
@@ -50,7 +54,7 @@ const Login = () => {
         marginTop: "120px",
       }}
     >
-      <MDBCard alignment="center">
+      <MDBCard alignment="center" style={{ paddingTop: 50 }}>
         <MDBIcon fas icon="user-circle" className="fa-2x" />
         <h5>Sign In</h5>
         <MDBCardBody>
@@ -79,12 +83,33 @@ const Login = () => {
                 validation="Please provide your password"
               />
             </div>
+            <div className="col-12">
+              <MDBBtn style={{ width: "100%" }} className="mt-2">
+                {loading && (
+                  <MDBSpinner
+                    size="sm"
+                    role="status"
+                    tag="span"
+                    className="me-2"
+                  />
+                )}
+                Login
+              </MDBBtn>
+            </div>
           </MDBValidation>
+          <br />
+          <MDBBtn
+            style={{ width: "100%" }}
+            color="danger"
+            onClick={() => loginWithRedirect()}
+          >
+            <MDBIcon className="me-2" fab icon="google" /> Google Sign In
+          </MDBBtn>
         </MDBCardBody>
         <MDBCardFooter>
-          <Link to="/register">
-            <p>Don't have an account ? Sign Up</p>
-          </Link>
+          <p>
+            Don't have an account ? <Link to="/register">Sign Up</Link>
+          </p>
         </MDBCardFooter>
       </MDBCard>
     </div>
