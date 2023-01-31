@@ -27,8 +27,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/addtour" element={<AddEditTour />} />
-          <Route path="/edittour/:id" element={<AddEditTour />} />
+          <Route path="/addTour" element={<AddEditTour />} />
+          <Route path="/editTour/:id" element={<AddEditTour />} />
         </Routes>
       </div>
     </BrowserRouter>

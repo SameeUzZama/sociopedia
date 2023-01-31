@@ -15,13 +15,14 @@ import { setLogout } from "../redux/features/authSlice";
 
 export const Header = () => {
   const [show, setShow] = useState(false);
+  
+  const { user } = useSelector((state) => ({ ...state.auth }));
 
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(setLogout());
   };
-  const { user } = useSelector((state) => ({ ...state.auth }));
 
   return (
     <div>

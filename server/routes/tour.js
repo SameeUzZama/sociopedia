@@ -1,9 +1,10 @@
 import express from "express";
 const router = express.Router();
+import auth from "../middleware/auth.js";
 
-import { createTour, getTours } from "../controller/tour.js";
+import { createTour, getTour } from "../controller/tour.js";
 
-router.post("/", createTour);
-router.get("/", getTours);
+router.post("/", auth, createTour);
+router.get("/", getTour);
 
 export default router;
