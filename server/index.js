@@ -8,6 +8,9 @@ import tourRouter from "./routes/tour.js";
 // mongodb+srv://codesamee:<password>@cluster0.eyydmtq.mongodb.net/?retryWrites=true&w=majority
 // mongodb+srv://codesamee:8378825832@cluster0.eyydmtq.mongodb.net/tour_db?retryWrites=true&w=majority
 
+// mongodb+srv://samee:8378825832@cluster0.b1uqbmt.mongodb.net/?retryWrites=true&w=majority
+
+
 //define port 5000 so our backend will run o 5000 port
 const port = 5000;
 
@@ -23,7 +26,7 @@ app.use("/users", userRouter); //   http://localhost:5000/users/signup
 app.use("/tour", tourRouter); //   http://localhost:5000/tour
 
 const MONGODB_URL =
-  "mongodb+srv://codesamee:8378825832@cluster0.eyydmtq.mongodb.net/tour_db?retryWrites=true&w=majority";
+  "mongodb+srv://samee:8378825832@cluster0.b1uqbmt.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose
   .connect(MONGODB_URL)

@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { MDBCol, MDBContainer, MDBRow, MDBTypography } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { getTour } from "../redux/features/tourSlice";
+import { getTours } from "../redux/features/tourSlice";
+import CardTour from "../Components/CardTour";
 
 export const Home = () => {
-  const { tour, loading } = useSelector((state) => ({ ...state.tour }));
+  const { tours, loading } = useSelector((state) => ({ ...state.tour }));
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getTour());
+    dispatch(getTours());
   }, []);
 
   if (loading) {
@@ -26,7 +26,7 @@ export const Home = () => {
       }}
     >
       <MDBRow className="mt-5">
-        {tour.length === 0 && (
+        {tours.length === 0 && (
           <MDBTypography className="text-center mb-0" tag="h2">
             No Tours Found
           </MDBTypography>
@@ -34,12 +34,10 @@ export const Home = () => {
         <MDBCol>
           <MDBContainer>
             <MDBRow className="row-cols-1 row-cols-md-3 g-2">
-              {tour &&
-                tour.map((item, index) => (
-                  <div key={index}>
-                    <h2>Tour Card</h2>
-                  </div>
-                ))}
+              {tours &&
+                tours?.map((item, index) => {
+                  return <CardTour key={index} {...item} />;
+                })}
             </MDBRow>
           </MDBContainer>
         </MDBCol>

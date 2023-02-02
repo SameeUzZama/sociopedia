@@ -13,7 +13,8 @@ API.interceptors.request.use((req) => {
 
 export const signIn = (formData) => API.post("/users/signin", formData);
 export const signUp = (formData) => API.post("/users/signup", formData);
-export const googleSignIn = (result) => API.post("/user/googleSignIn", result);
 
-export const createTour = (tour) => API.post("/tour", tour);
-export const getTour = () => API.get("/tour");
+export const createTour = (tourData) => API.post("/tour", tourData);
+export const getTours = () => API.get("/tour");
+export const getTour = (id) => API.get(`/tour/${id}`);
+export const getToursByUser = (userId) => API.get(`/tour/userTours${userId}`);

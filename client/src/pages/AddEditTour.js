@@ -21,13 +21,13 @@ const initialState = {
 };
 
 export const AddEditTour = () => {
-  const [tour, setTour] = useState(initialState);
+  const [tourData, setTourData] = useState(initialState);
   const { error, loading } = useSelector((state) => ({ ...state.tour }));
   const { user } = useSelector((state) => ({ ...state.auth }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { title, description, tags } = tour;
+  const { title, description, tags } = tourData;
 
   useEffect(() => {
     error && toast.error(error);
@@ -36,7 +36,7 @@ export const AddEditTour = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title && description && tags) {
-      const updatedTour = { ...tour, name: user?.result?.name };
+      const updatedTour = { ...tourData, name: user?.result?.name };
       dispatch(createTour({ updatedTour, navigate, toast }));
       handleCLear();
     }
@@ -44,25 +44,27 @@ export const AddEditTour = () => {
 
   const onInputChange = (e) => {
     const { name, value } = e.target;
-    setTour({ ...tour, [name]: value });
+    setTourData({ ...tourData, [name]: value });
   };
 
   const handleAddTag = (tag) => {
-    setTour({ ...tour, tags: [...tour.tags, tag] });
+    setTourData({ ...tourData, tags: [...tourData.tags, tag] });
   };
 
   const handleDeleteTag = (deleteTag) => {
-    setTour({ ...tour, tags: tour.tags.filter((tag) => tag !== deleteTag) });
+    setTourData({
+      ...tourData,
+      tags: tourData.tags.filter((tag) => tag !== deleteTag),
+    });
   };
 
   const handleCLear = () => {
-    setTour({ title: "", description: "", tags: [] });
+    setTourData({ title: "", description: "", tags: [] });
   };
 
   return (
     <div
       style={{
-        // margin: "auto",
         pading: "15px",
         maxWidth: "450px",
         alignContent: "center",
@@ -116,7 +118,9 @@ export const AddEditTour = () => {
               <FileBase
                 type="file"
                 multiple={false}
-                onDone={({ base64 }) => setTour({ ...tour, imageFile: base64 })}
+                onDone={({ base64 }) =>
+                  setTourData({ ...tourData, imageFile: base64 })
+                }
               />
             </div>
             <div className="col-12">

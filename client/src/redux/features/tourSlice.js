@@ -15,11 +15,35 @@ export const createTour = createAsyncThunk(
   }
 );
 
-export const getTour = createAsyncThunk(
-  "tour/getTour",
+export const getTours = createAsyncThunk(
+  "tour/getTours",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await api.getTour();
+      const response = await api.getTours();
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const getTour = createAsyncThunk(
+  "tour/getTour",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await api.getTour(id);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
+
+export const getToursByUser = createAsyncThunk(
+  "tour/getToursByUser",
+  async (userId, { rejectWithValue }) => {
+    try {
+      const response = await api.getToursByUser(userId);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -48,14 +72,36 @@ const tourSlice = createSlice({
       state.loading = false;
       state.error = action.payload.message;
     },
+    [getTours.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [getTours.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.tours = action.payload;
+    },
+    [getTours.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.message;
+    },
     [getTour.pending]: (state, action) => {
       state.loading = true;
     },
     [getTour.fulfilled]: (state, action) => {
       state.loading = false;
-      state.tours = action.payload;
+      state.tour = action.payload;
     },
     [getTour.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.message;
+    },
+    [getToursByUser.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [getToursByUser.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.userTours = action.payload;
+    },
+    [getToursByUser.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload.message;
     },
